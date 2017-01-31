@@ -19,7 +19,11 @@ public class Main {
     public Main() {
         DisplayManager.createDisplay();
         Loader loader = new Loader();
-
+        /*
+        -=={ New OBJ Loader Usage }==-
+         ModelData data = OBJFileLoader.loadOBJ("modelName");
+         RawModel model = loader.loadToVAO(data.getVerticies(),data.getTextureCoords(),data.getNormals(),data.getIndices());
+        */
         RawModel model = OBJLoader.loadObjModel("tree",loader);
         TexturedModel staticModel = new TexturedModel(model,new ModelTexture(loader.loadTexture("tree")));
         TexturedModel grass = new TexturedModel(OBJLoader.loadObjModel("grassModel",loader),new ModelTexture(loader.loadTexture("grassTexture")));
