@@ -3,6 +3,8 @@ package com.SinfulPixel.top.Terrains;
 import com.SinfulPixel.top.Models.RawModel;
 import com.SinfulPixel.top.RenderEngine.Loader;
 import com.SinfulPixel.top.Textures.ModelTexture;
+import com.SinfulPixel.top.Textures.TerrainTexture;
+import com.SinfulPixel.top.Textures.TerrainTexturePack;
 
 /**
  * Created by Vapor on 1/31/2017.
@@ -12,10 +14,12 @@ public class Terrain {
     private static final int VERTEX_COUNT = 128;
     private float x,z;
     private RawModel model;
-    private ModelTexture texture;
+    private TerrainTexturePack texturePack;
+    private TerrainTexture blendMap;
 
-    public Terrain(int gridX, int gridZ, Loader loader, ModelTexture texture){
-        this.texture=texture;
+    public Terrain(int gridX, int gridZ, Loader loader,TerrainTexturePack texturePack,TerrainTexture blendMap){
+        this.texturePack=texturePack;
+        this.blendMap=blendMap;
         this.x = gridX * SIZE;
         this.z = gridZ * SIZE;
         this.model = generateTerrain(loader);
@@ -70,7 +74,11 @@ public class Terrain {
         return model;
     }
 
-    public ModelTexture getTexture() {
-        return texture;
+    public TerrainTexturePack getTexturePack() {
+        return texturePack;
+    }
+
+    public TerrainTexture getBlendMap() {
+        return blendMap;
     }
 }
