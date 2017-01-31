@@ -3,6 +3,7 @@ package com.SinfulPixel.top;
 import com.SinfulPixel.top.Entities.Camera;
 import com.SinfulPixel.top.Entities.Entity;
 import com.SinfulPixel.top.Entities.Light;
+import com.SinfulPixel.top.Entities.Player;
 import com.SinfulPixel.top.Models.TexturedModel;
 import com.SinfulPixel.top.OBJConverter.ModelData;
 import com.SinfulPixel.top.OBJConverter.OBJFileLoader;
@@ -56,12 +57,17 @@ public class Main {
         //Ferns
         ModelData fernData = OBJFileLoader.loadOBJ("fern");
         RawModel fernModel = loader.loadToVAO(fernData.getVertices(),fernData.getTextureCoords(),fernData.getNormals(),fernData.getIndices());
-        TexturedModel fern = new TexturedModel(fernModel,new ModelTexture((loader.loadTexture("fern"))));
+        TexturedModel fern = new TexturedModel(fernModel,new ModelTexture(loader.loadTexture("fern")));
         fern.getTexture().setHasTransparency(true);
+        //Player
+        ModelData playerData = OBJFileLoader.loadOBJ("person");
+        RawModel playerModel = loader.loadToVAO(playerData.getVertices(),playerData.getTextureCoords(),playerData.getNormals(),playerData.getIndices());
+        TexturedModel playerM = new TexturedModel(playerModel,new ModelTexture(loader.loadTexture("playerTexture")));
+        Player player = new Player(playerM,new Vector3f(0,0,-50),0,0,0,0.4f);
         //---------------
 
 
-        Camera camera = new Camera();
+        Camera camera = new Camera(player);
         List<Entity> entities = new ArrayList<Entity>();
         Random random = new Random();
         for(int i=0;i<500;i++){
@@ -78,6 +84,8 @@ public class Main {
             //entity.increasePosition(0,0,-0.05f);
             //entity.increaseRotation(0,1,0);
             camera.move();
+            player.move();
+            renderer.processEntity(player);
             renderer.processTerrain(terrain);
             renderer.processTerrain(terrain1);
             for(Entity e:entities){

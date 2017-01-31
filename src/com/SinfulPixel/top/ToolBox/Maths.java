@@ -29,4 +29,13 @@ public class Maths {
         Matrix4f.translate(negativeCameraPos,viewMatrix,viewMatrix);
         return viewMatrix;
     }
+    public static float clamp(float variable, float min, float max) {
+        if (variable > max) {
+            return max;
+        } else if (variable < min) {
+            return min;
+        } else {
+            return variable;
+        }
+    }
 }
