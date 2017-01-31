@@ -7,6 +7,7 @@ import com.SinfulPixel.top.Models.TexturedModel;
 import com.SinfulPixel.top.RenderEngine.*;
 import com.SinfulPixel.top.Models.RawModel;
 import com.SinfulPixel.top.Shaders.StaticShader;
+import com.SinfulPixel.top.Terrains.Terrain;
 import com.SinfulPixel.top.Textures.ModelTexture;
 import com.sun.prism.MaskTextureGraphics;
 import org.lwjgl.opengl.Display;
@@ -25,12 +26,15 @@ public class Main {
         Camera camera = new Camera();
         Entity entity = new Entity(staticModel,new Vector3f(0,0,-50),0,0,0,1);
         Light light = new Light(new Vector3f(0,0,-20),new Vector3f(1,1,1));
+        Terrain terrain = new Terrain(-1,-1,loader,new ModelTexture(loader.loadTexture("grass")));
+        Terrain terrain1 = new Terrain(0,-1,loader,new ModelTexture(loader.loadTexture("grass")));
         MasterRenderer renderer = new MasterRenderer();
         while(!Display.isCloseRequested()){
             //entity.increasePosition(0,0,-0.05f);
             //entity.increaseRotation(0,1,0);
             camera.move();
-            
+            renderer.processTerrain(terrain);
+            renderer.processTerrain(terrain1);
             renderer.render(light,camera);
             DisplayManager.updateDisplay();
         }
