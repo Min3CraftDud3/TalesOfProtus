@@ -77,8 +77,8 @@ public class Main {
             entities.add(new Entity(fern,new Vector3f(random.nextFloat()*800-400,0,random.nextFloat()*-600),0,0,0,0.6f));
         }
         Light light = new Light(new Vector3f(20000,40000,20000),new Vector3f(1,1,1));
-        Terrain terrain = new Terrain(0,-1,loader,texturePack,blendMap);
-        Terrain terrain1 = new Terrain(-1,-1,loader,texturePack,blendMap);
+        Terrain terrain = new Terrain(0,-1,loader,texturePack,blendMap,"heightMap");
+        Terrain terrain1 = new Terrain(-1,-1,loader,texturePack,blendMap,"heightMap");
         MasterRenderer renderer = new MasterRenderer();
         while(!Display.isCloseRequested()){
             //entity.increasePosition(0,0,-0.05f);
